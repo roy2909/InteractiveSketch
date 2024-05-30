@@ -103,22 +103,6 @@ def create_shape_buttons():
     ]
 
 
-def initialize_reference_shapes():
-    """
-    Initialize the reference shapes for template matching.
-
-    Returns:
-    - Dictionary of reference shapes with their template images and matching threshold.
-    """
-    return {
-        'House': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/house.png', 0), 0.8),
-        'Heart': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/heart.png', 0), 0.8),
-        'Star': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/star.png', 0), 0.8),
-        'Tree': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/tree.png', 0), 0.8),
-        'Cloud': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/cloud.png', 0), 0.8),
-        'Circle': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/circle.png', 0), 0.8)
-    }
-
 
 def main():
     """
