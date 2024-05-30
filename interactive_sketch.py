@@ -38,3 +38,71 @@ class Canvas:
             text_size = cv2.getTextSize(self.text, font, font_scale, thickness)
             text_pos = (int(self.x + self.w / 2 - text_size[0][0] / 2), int(self.y + self.h / 2 + text_size[0][1] / 2))
             cv2.putText(img, self.text, text_pos, font, font_scale, text_color, thickness)
+    def contains(self, x, y):
+        """
+        Check if the point (x, y) is inside the canvas.
+        
+        Parameters:
+        - x, y: Coordinates of the point.
+        
+        Returns:
+        - True if the point is inside the canvas, False otherwise.
+        """
+        return self.x <= x <= self.x + self.w and self.y <= y <= self.y + self.h
+
+def initialize_hand_tracker():
+    """
+    Initialize the hand tracker.
+    
+    Returns:
+    - HandTracker object with a detection confidence threshold of 0.8.
+    """
+    return HandTracker(detection_confidence=int(0.8))
+
+def create_color_buttons():
+    """
+    Create a list of color buttons.
+    
+    Returns:
+    - List of Canvas objects representing the color buttons.
+    """
+    return [
+        Canvas(300, 0, 100, 100, (0, 0, 255)),
+        Canvas(400, 0, 100, 100, (255, 0, 0)),    
+        Canvas(500, 0, 100, 100, (0, 255, 0)),    
+        Canvas(600, 0, 100, 100, (255, 255, 0)),  
+        Canvas(700, 0, 100, 100, (255, 165, 0)),  
+        Canvas(800, 0, 100, 100, (128, 0, 128)),  
+        Canvas(900, 0, 100, 100, (255, 255, 255)),
+        Canvas(1000, 0, 100, 100, (0, 0, 0), 'Eraser'), 
+        Canvas(1100, 0, 100, 100, (100, 100, 100), 'Clear'), 
+        Canvas(1200, 0, 100, 100, (255, 0, 0), 'Fill') 
+    ]
+
+def create_shape_buttons():
+    """
+    Create a list of shape buttons.
+    
+    Returns:
+    - List of Canvas objects representing the shape buttons.
+    """
+    return [
+        Canvas(1100, 100, 100, 100, (255, 255, 255), 'Circle'), # Circle shape
+        Canvas(1100, 200, 100, 100, (255, 255, 255), 'Square')  # Square shape
+    ]
+
+def initialize_reference_shapes():
+    """
+    Initialize the reference shapes for template matching.
+    
+    Returns:
+    - Dictionary of reference shapes with their template images and matching threshold.
+    """
+    return {
+        'House': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/house.png', 0), 0.8),
+        'Heart': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/heart.png', 0), 0.8),
+        'Star': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/star.png', 0), 0.8),
+        'Tree': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/tree.png', 0), 0.8),
+        'Cloud': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/cloud.png', 0), 0.8),
+        'Circle': (cv2.imread('/home/rahulroy/comp_vision/src/virtual_painter/images_refernce/circle.png', 0), 0.8)
+    }
