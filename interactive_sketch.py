@@ -103,7 +103,6 @@ def create_shape_buttons():
     ]
 
 
-
 def main():
     """
     Main function to run the virtual painter application.
