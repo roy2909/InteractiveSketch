@@ -66,3 +66,53 @@ class HandTracker():
                 if draw:
                     cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
         return landmarklist
+    
+    def getUpFingers(self, img):
+        """
+        Determine which fingers are up.
+        
+        Parameters:
+        - img: The input image.
+        
+        Returns:
+        - A list of booleans indicating which fingers are up.
+        """
+        pos = self.getPostion(img, draw=False)
+        self.upfingers = []
+        if pos:
+            # Thumb
+            self.upfingers.append((pos[4][1] < pos[3][1] and (pos[5][0] - pos[4][0] > 10)))
+            # Index finger
+            self.upfingers.append((pos[8][1] < pos[7][1] and pos[7][1] < pos[6][1]))
+            # Middle finger
+            self.upfingers.append((pos[12][1] < pos[11][1] and pos[11][1] < pos[10][1]))
+            # Ring finger
+            self.upfingers.append((pos[16][1] < pos[15][1] and pos[15][1] < pos[14][1]))
+            # Pinky finger
+            self.upfingers.append((pos[20][1] < pos[19][1] and pos[19][1] < pos[18][1]))
+        return self.upfingers
+
+    def get_distance(self, point1_idx, point2_idx, frame, draw=False):
+        """
+        Calculate the distance between two landmarks.
+        
+        Parameters:
+        - point1_idx: Index of the first landmark.
+        - point2_idx: Index of the second landmark.
+        - frame: The input image.
+        - draw: Whether to draw the distance measurement on the image.
+        
+        Returns:
+        - The distance between the two points.
+        """
+        landmarklist = self.getPostion(frame, draw=False)
+        if landmarklist:
+            x1, y1 = landmarklist[point1_idx]
+            x2, y2 = landmarklist[point2_idx]
+            distance = math.hypot(x2 - x1, y2 - y1)
+            if draw:
+                cv2.line(frame, (x1, y1), (x2, y2), (255, 0, 255), 3)
+                cv2.circle(frame, (x1, y1), 5, (255, 0, 255), cv2.FILLED)
+                cv2.circle(frame, (x2, y2), 5, (255, 0, 255), cv2.FILLED)
+            return distance
+        return None
