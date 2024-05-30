@@ -42,3 +42,27 @@ class HandTracker():
                 if draw:
                     self.mpDraw.draw_landmarks(img, handlandmarks, self.mpHands.HAND_CONNECTIONS)
         return img
+    
+    def getPostion(self, img, num=0, draw=True):
+        """
+        Get the positions of hand landmarks.
+        
+        Parameters:
+        - img: The input image.
+        - num: Index of the hand to process (default is 0).
+        - draw: Whether to draw the hand landmarks on the image.
+        
+        Returns:
+        - A list of landmark positions (x, y).
+        """
+        landmarklist = []
+        if self.results.multi_hand_landmarks:
+            myHand = self.results.multi_hand_landmarks[num]
+            for lm in myHand.landmark:
+                h, w, _ = img.shape
+                cx, cy = int(lm.x * w), int(lm.y * h)
+                landmarklist.append((cx, cy))
+
+                if draw:
+                    cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
+        return landmarklist
