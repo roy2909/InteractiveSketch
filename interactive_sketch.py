@@ -105,7 +105,7 @@ def create_shape_buttons():
 
 def main():
     """
-    Main function to run the virtual painter application.
+    Main function to run the sketch  application.
     """
     # Initialize the hand tracker
     hand_tracker = initialize_hand_tracker()
