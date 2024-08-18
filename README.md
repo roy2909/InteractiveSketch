@@ -1,6 +1,6 @@
 # Interactive Sketch
 
-The Interactive Sketch is an interactive application that allows users to draw and sketch on a virtual canvas using hand gestures captured by a camera. It leverages computer vision techniques to detect and track hand movements, enabling a hands-free drawing experience.
+The Interactive Sketch is an interactive application that allows users to draw and sketch on a virtual canvas using hand gestures captured by a camera. It leverages computer vision techniques to detect and track hand movements, enabling a touchless drawing experience.
 
 ## Features
 
